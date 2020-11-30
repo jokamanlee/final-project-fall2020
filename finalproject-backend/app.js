@@ -1,5 +1,3 @@
-//Backend Application for Final Project
-
 const express = require("express");
 
 const app = express();
@@ -22,8 +20,12 @@ firebase.initializeApp(firebaseConfig);
 
 const indexRoute = require("./routes/index.js");
 const postRoute = require("./routes/post.js");
-const createRoute = require("./routes/createBlogpost.js");
+const createRoute = require("./routes/createPost.js");
 
 app.use("/", indexRoute);
 app.use("/post", postRoute);
 app.use("/create", createRoute);
+
+app.listen(port, () =>
+  console.log(`Exercise Four is running at localhost:${port}`)
+);
