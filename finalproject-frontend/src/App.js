@@ -5,6 +5,7 @@ import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "./App.css";
+import Home from "./containers/Home";
 
 import Login from "./containers/Login";
 import CreateAccount from "./containers/CreateAccount";
@@ -85,7 +86,8 @@ function App() {
           <CreateAccount CreateAccountFunction={CreateAccountFunction} />
         </Route>
         <Route exact path="/">
-          <UserProfile />
+          {/* <UserProfile /> */}
+          <Home />
         </Route>
       </Router>
     </div>
