@@ -5,7 +5,7 @@ function Home() {
   const [sampleAPIData, setSampleAPIData] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:4000`)
+      .get(`http://localhost:4000/`)
       .then(function (response) {
         if (response.data) {
           setSampleAPIData(response.data);
