@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-function UserProfile() {
-  return <div></div>;
+import UserProfileComponenet from "../components/UserProfileComponent";
+
+function UserProfile({ userInformation }) {
+  return (
+    <div>
+      <h1>User Profile</h1>
+      <UserProfileComponenet userInformation={userInformation} />
+    </div>
+  );
 }
 
 export default UserProfile;

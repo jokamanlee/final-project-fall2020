@@ -1,4 +1,5 @@
 const express = require("express");
+
 const router = express.Router();
 
 const firebase = require("firebase");
@@ -7,19 +8,24 @@ const db = firebase.firestore();
 
 const posts = db.collection("posts");
 
-router.get("/", (req, res) => {
-  const postsArray = [];
+// const sample = [{ name: "jo", job: "student" }];
 
+router.get("/", (req, res) => res.send("No ID Provided"));
+
+router.get("/:id", (req, res) => {
+  const queryId = req.params.id;
   posts
+    .doc(queryId)
     .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        postsArray.push(doc.data());
-      });
-      return res.send(postsArray);
+    .then(function (doc) {
+      if (doc.exists) {
+        const data = doc.data();
+        return res.send(doc.data());
+      } else {
+        return res.send("No document exists");
+      }
     })
-    .catch(function (e) {
-      console.warn("error", e);
+    .catch(function (error) {
       return res.send(error);
     });
 });

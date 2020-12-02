@@ -17,7 +17,7 @@ router.get("/", (req, res) => res.send(form));
 router.get("/submit", (req, res) => {
   const queryParams = req.query;
 
-  const idfromTitle = queryParams.title.replace(/\s+/g, "-").toLowerCase();
+  const idFromTitle = queryParams.title.replace(/\s+/g, "-").toLowerCase();
 
   posts
     .doc(idFromTitle)

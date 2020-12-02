@@ -1,6 +1,7 @@
 import "./App.css";
 
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -27,12 +28,39 @@ const firebaseConfig = {
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [userInformation, setUserInformation] = useState({});
+  const [APIData, setAPIData] = useState([]);
 
   useEffect(() => {
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
   }, [firebaseConfig]);
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        setLoggedIn(true);
+        setUserInformation({ user });
+      } else {
+        setLoggedIn(false);
+      }
+      setLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4000/post/hi`)
+      .then(function (response) {
+        if (response.data) {
+          setAPIData(response.data);
+        }
+      })
+      .catch(function (error) {
+        console.log("error", error);
+      });
+  }, []);
 
   function LoginFunction(e) {
     //this is what you will run when you want to log in
@@ -56,6 +84,16 @@ function App() {
   }
   function LogoutFunction() {
     //Function to run when you want to log out...
+    firebase
+      .auth()
+      .signOut()
+      .then(function () {
+        setLoggedIn(false);
+        setUserInformation({});
+      })
+      .catch(function (error) {
+        console.log("LOGOUT ERROR", error);
+      });
   }
   function CreateAccountFunction(e) {
     //what will run when you create an account...
@@ -74,20 +112,34 @@ function App() {
         console.log("ACCOUNT CREATION FAILED", error);
       });
   }
-  console.log({ loggedIn });
+  if (loading) return null;
   return (
     <div className="App">
-      <Header loggedIn={loggedIn} LogoutFuntion={LogoutFunction} />
+      <Header loggedIn={loggedIn} LogoutFunction={LogoutFunction} />
       <Router>
         <Route exact path="/login">
-          <Login LoginFunction={LoginFunction} />
+          {/*if someone is logged in do not take them to login page - take them to user profile*/}
+          {!loggedIn ? (
+            <Login LoginFunction={LoginFunction} />
+          ) : (
+            <Redirect to="/" />
+          )}
         </Route>
         <Route exact path="/create-account">
-          <CreateAccount CreateAccountFunction={CreateAccountFunction} />
+          {/*if someone is logged in do not take them to create account page - take them to user profile*/}
+          {!loggedIn ? (
+            <CreateAccount CreateAccountFunction={CreateAccountFunction} />
+          ) : (
+            <Redirect to="/" />
+          )}
         </Route>
         <Route exact path="/">
-          {/* <UserProfile /> */}
-          <Home />
+          {/*if someone is not logged in do not take them to user profile page - take them to login*/}
+          {!loggedIn ? (
+            <Redirect to="/login" />
+          ) : (
+            <UserProfile userInformation={userInformation} />
+          )}
         </Route>
       </Router>
     </div>
