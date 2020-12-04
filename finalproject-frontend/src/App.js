@@ -1,7 +1,6 @@
 import "./App.css";
 
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -11,6 +10,7 @@ import Home from "./containers/Home";
 import Login from "./containers/Login";
 import CreateAccount from "./containers/CreateAccount";
 import UserProfile from "./containers/UserProfile";
+// import Create from "./containers/Create";
 
 import Header from "./components/Header";
 
@@ -28,8 +28,7 @@ const firebaseConfig = {
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [userInformation, setUserInformation] = useState({});
-  const [APIData, setAPIData] = useState([]);
+  const [userAuthInfo, setUserAuthInfo] = useState({});
 
   useEffect(() => {
     if (!firebase.apps.length) {
@@ -41,25 +40,12 @@ function App() {
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         setLoggedIn(true);
-        setUserInformation({ user });
+        setUserAuthInfo(user);
       } else {
         setLoggedIn(false);
       }
       setLoading(false);
     });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:4000/post/hi`)
-      .then(function (response) {
-        if (response.data) {
-          setAPIData(response.data);
-        }
-      })
-      .catch(function (error) {
-        console.log("error", error);
-      });
   }, []);
 
   function LoginFunction(e) {
@@ -89,7 +75,7 @@ function App() {
       .signOut()
       .then(function () {
         setLoggedIn(false);
-        setUserInformation({});
+        setUserAuthInfo({});
       })
       .catch(function (error) {
         console.log("LOGOUT ERROR", error);
@@ -112,13 +98,13 @@ function App() {
         console.log("ACCOUNT CREATION FAILED", error);
       });
   }
+
   if (loading) return null;
   return (
     <div className="App">
       <Header loggedIn={loggedIn} LogoutFunction={LogoutFunction} />
       <Router>
         <Route exact path="/login">
-          {/*if someone is logged in do not take them to login page - take them to user profile*/}
           {!loggedIn ? (
             <Login LoginFunction={LoginFunction} />
           ) : (
@@ -126,20 +112,25 @@ function App() {
           )}
         </Route>
         <Route exact path="/create-account">
-          {/*if someone is logged in do not take them to create account page - take them to user profile*/}
           {!loggedIn ? (
             <CreateAccount CreateAccountFunction={CreateAccountFunction} />
           ) : (
-            <Redirect to="/" />
+            <Redirect to="/user-profile" />
           )}
         </Route>
-        <Route exact path="/">
-          {/*if someone is not logged in do not take them to user profile page - take them to login*/}
+        <Route exact path="/user-profile">
           {!loggedIn ? (
             <Redirect to="/login" />
           ) : (
-            <UserProfile userInformation={userInformation} />
+            <UserProfile userAuthInfo={userAuthInfo} />
           )}
+        </Route>
+        {/* <Route exact path="/create">
+          <Create />
+        </Route> */}
+
+        <Route exact path="/">
+          <Home />
         </Route>
       </Router>
     </div>

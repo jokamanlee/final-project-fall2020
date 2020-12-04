@@ -1,5 +1,18 @@
-.header {
+.App {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.Header nav {
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: flex-end;
+}
+
+.Header nav a {
+  color: black;
+  cursor: pointer;
+  font-size: 20px;
+  display: block;
+  margin: 10px;
+  text-decoration: underline;
 }

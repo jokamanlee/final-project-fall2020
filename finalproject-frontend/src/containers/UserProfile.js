@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import UserProfileComponenet from "../components/UserProfileComponent";
 
-function UserProfile({ userInformation }) {
+function UserProfile({ userAuthInfo }) {
   return (
     <div>
       <h1>User Profile</h1>
-      <UserProfileComponenet userInformation={userInformation} />
+      <UserProfileComponenet userAuthInfo={userAuthInfo} />
     </div>
   );
 }

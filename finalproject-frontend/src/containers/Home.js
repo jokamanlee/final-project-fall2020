@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function Home() {
-  const [sampleAPIData, setSampleAPIData] = useState([]);
+  const [POSTSData, setPOSTSData] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/`)
+      .get(`https://stormy-temple-10357.herokuapp.com/`)
       .then(function (response) {
         if (response.data) {
-          setSampleAPIData(response.data);
+          setPOSTSData(response.data);
         }
       })
       .catch(function (error) {
@@ -16,8 +16,19 @@ function Home() {
       });
   }, []);
 
-  console.log({ sampleAPIData });
-  return <div>Hello</div>;
+  console.log({ POSTSData });
+  return (
+    <div>
+      <h1>Home Page</h1>
+      {POSTSData.map((item, i) => (
+        <div key={i}>
+          <p>{item.name}</p>
+          <img src={item.photo} />
+          <p>{item.text}</p>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default Home;

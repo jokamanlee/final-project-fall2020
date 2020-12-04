@@ -1,16 +1,16 @@
 import React from "react";
 
-function UserProfileComponent({ userInformation }) {
-  console.log({ userInformation });
+function UserProfileComponent({ userAuthInfo }) {
+  console.log({ userAuthInfo });
   return (
     <div>
       <p>
         <strong>UID:</strong>
-        {userInformation.user.uid}
+        {userAuthInfo.uid}
       </p>
       <p>
         <strong>Email:</strong>
-        {userInformation.user.email}
+        {userAuthInfo.email}
       </p>
     </div>
   );

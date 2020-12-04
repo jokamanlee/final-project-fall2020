@@ -6,9 +6,6 @@ const firebase = require("firebase");
 const db = firebase.firestore();
 
 const posts = db.collection("posts");
-// const sample = [{ name: "jo", job: "student" }];
-
-// router.get("/", (req, res) => res.send(sample));
 
 router.get("/", (req, res) => {
   const postsArray = [];
