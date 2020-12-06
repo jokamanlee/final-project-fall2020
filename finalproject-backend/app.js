@@ -21,12 +21,10 @@ firebase.initializeApp(firebaseConfig);
 const indexRoute = require("./routes/index.js");
 const postRoute = require("./routes/post.js");
 const createRoute = require("./routes/createPost.js");
+const findRoute = require("./routes/findPost.js");
 
 app.use(function (req, res, next) {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://stormy-temple-10357.herokuapp.com/"
-  ); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
@@ -37,5 +35,6 @@ app.use(function (req, res, next) {
 app.use("/", indexRoute);
 app.use("/post", postRoute);
 app.use("/create", createRoute);
+app.use("/find", findRoute);
 
 app.listen(port, () => console.log(`Backend is running at localhost:${port}`));

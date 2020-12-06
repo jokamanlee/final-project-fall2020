@@ -1,20 +1,24 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-function Create() {
+function Create({ userAuthInfo }) {
   //   const [submited, setSubmitted] = useState(false);
-  useEffect(() => {
-    axios.post(
-      `https://stormy-temple-10357.herokuapp.com/create/submit`
-        .then((res) => console.log("Data send"))
-        .catch(function (error) {
-          console.log("error", error);
-        })
-    );
-  }, []);
+  //   useEffect(() => {
+  //     axios
+  //       .get(`https://stormy-temple-10357.herokuapp.com/create/submit`)
+  //       .then()
+  //       .catch(function (error) {
+  //         console.log("error", error);
+  //       });
+  //   }, []);
+
+  //   router.get("/", (req, res) => res.send(form));
   return (
     <div>
-      <form action="https://stormy-temple-10357.herokuapp.com/create/submit">
+      <form
+        action="https://stormy-temple-10357.herokuapp.com/create/submit"
+        method="get"
+      >
         <label for="name">Name:</label>
         <input type="text" name="name" placeholder="Name" />
         <label for="text">Text:</label>
@@ -23,7 +27,13 @@ function Create() {
           name="text"
           placeholder="Write what you want to write"
         />
-        <input type="file" id="photo" name="photo" />
+        <input
+          type="text"
+          id="photo"
+          name="photo"
+          placeholder="Copy location path of photo)"
+        />
+        <input type="text" name="id" value={userAuthInfo.uid} />
         <button type="submit">Submit Post</button>
       </form>
     </div>

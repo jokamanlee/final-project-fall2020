@@ -10,7 +10,7 @@ import Home from "./containers/Home";
 import Login from "./containers/Login";
 import CreateAccount from "./containers/CreateAccount";
 import UserProfile from "./containers/UserProfile";
-// import Create from "./containers/Create";
+import Create from "./containers/Create";
 
 import Header from "./components/Header";
 
@@ -125,9 +125,9 @@ function App() {
             <UserProfile userAuthInfo={userAuthInfo} />
           )}
         </Route>
-        {/* <Route exact path="/create">
-          <Create />
-        </Route> */}
+        <Route exact path="/create">
+          <Create userAuthInfo={userAuthInfo} />
+        </Route>
 
         <Route exact path="/">
           <Home />

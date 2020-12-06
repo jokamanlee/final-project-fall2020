@@ -9,6 +9,7 @@ function Home() {
       .then(function (response) {
         if (response.data) {
           setPOSTSData(response.data);
+          console.log(response.data);
         }
       })
       .catch(function (error) {
@@ -16,17 +17,20 @@ function Home() {
       });
   }, []);
 
-  console.log({ POSTSData });
   return (
-    <div>
+    <div className="Home">
       <h1>Home Page</h1>
-      {POSTSData.map((item, i) => (
-        <div key={i}>
-          <p>{item.name}</p>
-          <img src={item.photo} />
-          <p>{item.text}</p>
-        </div>
-      ))}
+      <div className="postWrap">
+        {POSTSData.map((item, i) => (
+          <div className="Item" key={i}>
+            <p className="Name">{item.name}</p>
+            <div className="photoContainer">
+              <img className="Photo" src={item.photo} />
+            </div>
+            <p className="Text">{item.text}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
