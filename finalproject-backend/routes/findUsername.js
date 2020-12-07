@@ -5,12 +5,13 @@ const firebase = require("firebase");
 
 const db = firebase.firestore();
 
-const posts = db.collection("allPosts");
+const posts = db.collection("allUsers");
 
-router.get("/", (req, res) => {
+router.get("/:id", (req, res) => {
   const postsArray = [];
-
+  const queryId = req.params.id;
   posts
+    .where("id", "==", queryId)
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {

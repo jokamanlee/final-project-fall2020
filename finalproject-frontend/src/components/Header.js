@@ -9,6 +9,9 @@ function Header({ loggedIn, LogoutFunction }) {
             <a href="/">Home</a>
             <a href="/user-profile">User Profile</a>
             <a href="/create">Create</a>
+            <a href="/bracelet">Bracelets</a>
+            <a href="/earring">Earrings</a>
+            <a href="/necklace">Necklaces</a>
             <a onClick={() => LogoutFunction()}>Logout</a>
           </>
         ) : (

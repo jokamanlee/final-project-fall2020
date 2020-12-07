@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/firestore";
 import "./App.css";
 import Home from "./containers/Home";
 
@@ -11,8 +12,12 @@ import Login from "./containers/Login";
 import CreateAccount from "./containers/CreateAccount";
 import UserProfile from "./containers/UserProfile";
 import Create from "./containers/Create";
+import CreateUsername from "./containers/CreateUsername";
 
 import Header from "./components/Header";
+import Bracelet from "./containers/Bracelets";
+import Necklace from "./containers/Necklaces";
+import Earring from "./containers/Earrings";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
@@ -28,6 +33,7 @@ const firebaseConfig = {
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [justCreated, setJustCreated] = useState(false);
   const [userAuthInfo, setUserAuthInfo] = useState({});
 
   useEffect(() => {
@@ -92,13 +98,15 @@ function App() {
       .createUserWithEmailAndPassword(email, password)
       .then(function (response) {
         console.log("VALID ACCOUNT CREATED FOR:", email, response);
+        setJustCreated(true);
         setLoggedIn(true);
       })
+
       .catch(function (error) {
         console.log("ACCOUNT CREATION FAILED", error);
       });
   }
-
+  console.log(justCreated);
   if (loading) return null;
   return (
     <div className="App">
@@ -118,15 +126,37 @@ function App() {
             <Redirect to="/user-profile" />
           )}
         </Route>
+        <Route exact path="/create-username">
+          {justCreated ? (
+            <Redirect to="/user-profile" />
+          ) : (
+            <CreateUsername
+              userAuthInfo={userAuthInfo}
+              justCreated={justCreated}
+            />
+          )}
+        </Route>
         <Route exact path="/user-profile">
           {!loggedIn ? (
             <Redirect to="/login" />
           ) : (
-            <UserProfile userAuthInfo={userAuthInfo} />
+            <UserProfile
+              userAuthInfo={userAuthInfo}
+              justCreated={justCreated}
+            />
           )}
         </Route>
         <Route exact path="/create">
           <Create userAuthInfo={userAuthInfo} />
+        </Route>
+        <Route exact path="/bracelet">
+          <Bracelet />
+        </Route>
+        <Route exact path="/necklace">
+          <Necklace />
+        </Route>
+        <Route exact path="/earring">
+          <Earring />
         </Route>
 
         <Route exact path="/">

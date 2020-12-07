@@ -2,15 +2,13 @@ const express = require("express");
 const router = express.Router();
 const firebase = require("firebase");
 const db = firebase.firestore();
-// const posts = db.collection("allPosts").doc("hello");
 
 router.get("/submit", (req, res) => {
   const queryParams = req.query;
-  // const idOfPost = queryParams.id;
-  const nameOfPost = queryParams.name;
+  const username = queryParams.username;
 
-  db.collection("allPosts")
-    .doc(nameOfPost)
+  db.collection("allUsers")
+    .doc(username)
     .set(queryParams)
     .then()
     .catch(function (error) {

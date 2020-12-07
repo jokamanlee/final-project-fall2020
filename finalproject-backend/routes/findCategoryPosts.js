@@ -7,10 +7,11 @@ const db = firebase.firestore();
 
 const posts = db.collection("allPosts");
 
-router.get("/", (req, res) => {
+router.get("/:cat", (req, res) => {
   const postsArray = [];
-
+  const queryCat = req.params.cat;
   posts
+    .where("cat", "==", queryCat)
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {

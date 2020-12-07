@@ -22,6 +22,9 @@ const indexRoute = require("./routes/index.js");
 const postRoute = require("./routes/post.js");
 const createRoute = require("./routes/createPost.js");
 const findRoute = require("./routes/findPost.js");
+const findCatRoute = require("./routes/findCategoryPosts.js");
+const createNameRoute = require("./routes/createName.js");
+const findUsernameRoute = require("./routes/findUsername.js");
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
@@ -36,5 +39,7 @@ app.use("/", indexRoute);
 app.use("/post", postRoute);
 app.use("/create", createRoute);
 app.use("/find", findRoute);
-
+app.use("/findCat", findCatRoute);
+app.use("/createName", createNameRoute);
+app.use("/findName", findUsernameRoute);
 app.listen(port, () => console.log(`Backend is running at localhost:${port}`));
