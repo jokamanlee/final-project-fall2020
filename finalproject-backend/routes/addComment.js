@@ -1,23 +1,28 @@
 const express = require("express");
 const router = express.Router();
 const firebase = require("firebase");
+// const admin = require("firebase-admin");
 const db = firebase.firestore();
+
 // const posts = db.collection("allPosts").doc("hello");
 
-router.get("/submit", (req, res) => {
+router.get("/", (req, res) => {
   const queryParams = req.query;
-  // const idOfPost = queryParams.id;
   const nameOfPost = queryParams.name;
 
   db.collection("allPosts")
     .doc(nameOfPost)
-    .set(queryParams, {
-      comments: firebase.firestore.FieldValue.arrayUnion(),
+    // .doc("fds")
+
+    // .update({ comments: queryParams.comment }, { merge: true })
+
+    .update({
+      comments: firebase.firestore.FieldValue.arrayUnion(queryParams.comment),
     })
-    .then()
+    .then(res.send("Yay"))
     .catch(function (error) {
       console.log("error", error);
-      res.send("Failed Submission");
+      res.send("Failed Comment");
     });
 });
 

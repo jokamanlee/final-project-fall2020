@@ -6,6 +6,7 @@ function BraceletComponent() {
   useEffect(() => {
     axios
       .get(`https://stormy-temple-10357.herokuapp.com/findCat/bracelet`)
+
       .then(function (response) {
         if (response.data) {
           setPOSTData(response.data);

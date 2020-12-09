@@ -5,7 +5,8 @@ function Create({ userAuthInfo }) {
     <div>
       <iframe name="hiddenFrame"></iframe>
       <form
-        action="https://stormy-temple-10357.herokuapp.com/create/submit"
+        // action="https://stormy-temple-10357.herokuapp.com/create/submit"
+        action="http://localhost:4000/create/submit"
         method="get"
         target="hiddenFrame"
       >

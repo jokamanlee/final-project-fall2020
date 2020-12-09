@@ -8,9 +8,10 @@ function UserProfileComponent({ userAuthInfo }) {
 
   useEffect(() => {
     axios
-      .get(
-        `https://stormy-temple-10357.herokuapp.com/findName/${userAuthInfo.uid}`
-      )
+      // .get(
+      //   `https://stormy-temple-10357.herokuapp.com/findName/${userAuthInfo.uid}`
+      // )
+      .get(`http://localhost:4000/findName/${userAuthInfo.uid}`)
       .then(function (userResponse) {
         if (userResponse.data) {
           setUserData(userResponse.data);
@@ -26,7 +27,8 @@ function UserProfileComponent({ userAuthInfo }) {
   console.log(userData);
   useEffect(() => {
     axios
-      .get(`https://stormy-temple-10357.herokuapp.com/find/${userAuthInfo.uid}`)
+      // .get(`https://stormy-temple-10357.herokuapp.com/find/${userAuthInfo.uid}`)
+      .get(`http://localhost:4000/find/${userAuthInfo.uid}`)
       .then(function (response) {
         if (response.data) {
           setPOSTData(response.data);

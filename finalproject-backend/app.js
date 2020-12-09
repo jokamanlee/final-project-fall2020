@@ -25,6 +25,9 @@ const findRoute = require("./routes/findPost.js");
 const findCatRoute = require("./routes/findCategoryPosts.js");
 const createNameRoute = require("./routes/createName.js");
 const findUsernameRoute = require("./routes/findUsername.js");
+const addCommentRoute = require("./routes/addComment");
+const findCommentRoute = require("./routes/findComments");
+// const addLikesRoute = require("./routes/addLikes");
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
@@ -42,4 +45,7 @@ app.use("/find", findRoute);
 app.use("/findCat", findCatRoute);
 app.use("/createName", createNameRoute);
 app.use("/findName", findUsernameRoute);
+app.use("/addComment", addCommentRoute);
+app.use("/findComment", findCommentRoute);
+// app.use("/addLikes", addLikesRoute);
 app.listen(port, () => console.log(`Backend is running at localhost:${port}`));
