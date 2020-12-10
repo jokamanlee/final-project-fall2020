@@ -18,7 +18,6 @@ import Header from "./components/Header";
 import Bracelet from "./containers/Bracelets";
 import Necklace from "./containers/Necklaces";
 import Earring from "./containers/Earrings";
-import Comments from "./containers/Comments";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
@@ -159,12 +158,8 @@ function App() {
         <Route exact path="/earring">
           <Earring />
         </Route>
-        {/* <Route exact path="/comments">
-          <Comments />
-        </Route> */}
-
         <Route exact path="/">
-          <Home userAuthInfo={userAuthInfo} />
+          <Home />
         </Route>
       </Router>
     </div>

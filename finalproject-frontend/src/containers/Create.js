@@ -29,7 +29,8 @@ function Create({ userAuthInfo }) {
           <option value="necklace">Necklace</option>
           <option value="earring">Earring</option>
         </select>
-        <input type="text" name="id" value={userAuthInfo.uid} />
+        <input type="hidden" name="id" value={userAuthInfo.uid} />
+        <input type="hidden" name="comments[]" />
 
         <button type="submit">Submit Post</button>
       </form>

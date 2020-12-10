@@ -8,12 +8,18 @@ router.get("/submit", (req, res) => {
   const queryParams = req.query;
   // const idOfPost = queryParams.id;
   const nameOfPost = queryParams.name;
+  const arrayToSet = [];
+  console.log(queryParams);
+  arrayToSet.push(queryParams.value);
 
   db.collection("allPosts")
     .doc(nameOfPost)
-    .set(queryParams, {
-      comments: firebase.firestore.FieldValue.arrayUnion(),
-    })
+    .set(
+      queryParams
+      // arrayToSet
+      // comments: firebase.firestore.FieldValue.arrayUnion(),
+    )
+    // .add(arrayToSet)
     .then()
     .catch(function (error) {
       console.log("error", error);
