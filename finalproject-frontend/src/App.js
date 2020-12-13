@@ -12,7 +12,6 @@ import Login from "./containers/Login";
 import CreateAccount from "./containers/CreateAccount";
 import UserProfile from "./containers/UserProfile";
 import Create from "./containers/Create";
-import CreateUsername from "./containers/CreateUsername";
 
 import Header from "./components/Header";
 import Bracelet from "./containers/Bracelets";
@@ -33,7 +32,6 @@ const firebaseConfig = {
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [justCreated, setJustCreated] = useState(false);
   const [userAuthInfo, setUserAuthInfo] = useState({});
 
   useEffect(() => {
@@ -98,7 +96,6 @@ function App() {
       .createUserWithEmailAndPassword(email, password)
       .then(function (response) {
         console.log("VALID ACCOUNT CREATED FOR:", email, response);
-        setJustCreated(true);
         setLoggedIn(true);
       })
 
@@ -106,7 +103,6 @@ function App() {
         console.log("ACCOUNT CREATION FAILED", error);
       });
   }
-  console.log(justCreated);
   if (loading) return null;
   return (
     <div className="App">
@@ -116,7 +112,7 @@ function App() {
           {!loggedIn ? (
             <Login LoginFunction={LoginFunction} />
           ) : (
-            <Redirect to="/" />
+            <Redirect to="/" userAuthInfo={userAuthInfo} />
           )}
         </Route>
         <Route exact path="/create-account">
@@ -126,24 +122,12 @@ function App() {
             <Redirect to="/user-profile" />
           )}
         </Route>
-        <Route exact path="/create-username">
-          {justCreated ? (
-            <Redirect to="/user-profile" />
-          ) : (
-            <CreateUsername
-              userAuthInfo={userAuthInfo}
-              justCreated={justCreated}
-            />
-          )}
-        </Route>
+
         <Route exact path="/user-profile">
           {!loggedIn ? (
             <Redirect to="/login" />
           ) : (
-            <UserProfile
-              userAuthInfo={userAuthInfo}
-              justCreated={justCreated}
-            />
+            <UserProfile userAuthInfo={userAuthInfo} />
           )}
         </Route>
         <Route exact path="/create">
@@ -159,7 +143,7 @@ function App() {
           <Earring />
         </Route>
         <Route exact path="/">
-          <Home />
+          <Home userAuthInfo={userAuthInfo} />
         </Route>
       </Router>
     </div>

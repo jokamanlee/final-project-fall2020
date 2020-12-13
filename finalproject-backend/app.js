@@ -19,14 +19,15 @@ const firebase = require("firebase");
 firebase.initializeApp(firebaseConfig);
 
 const indexRoute = require("./routes/index.js");
-const postRoute = require("./routes/post.js");
 const createRoute = require("./routes/createPost.js");
 const findRoute = require("./routes/findPost.js");
 const findCatRoute = require("./routes/findCategoryPosts.js");
 const createNameRoute = require("./routes/createName.js");
 const findUsernameRoute = require("./routes/findUsername.js");
 const addCommentRoute = require("./routes/addComment");
-// const addLikesRoute = require("./routes/addLikes");
+const addLikesRoute = require("./routes/addLikes");
+const deleteNameRoute = require("./routes/deleteName.js");
+const deleteRoute = require("./routes/deletePost.js");
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
@@ -38,12 +39,14 @@ app.use(function (req, res, next) {
 });
 
 app.use("/", indexRoute);
-app.use("/post", postRoute);
 app.use("/create", createRoute);
 app.use("/find", findRoute);
 app.use("/findCat", findCatRoute);
 app.use("/createName", createNameRoute);
 app.use("/findName", findUsernameRoute);
 app.use("/addComment", addCommentRoute);
-// app.use("/addLikes", addLikesRoute);
+app.use("/addLikes", addLikesRoute);
+app.use("/deleteName", deleteNameRoute);
+app.use("/delete", deleteRoute);
+
 app.listen(port, () => console.log(`Backend is running at localhost:${port}`));

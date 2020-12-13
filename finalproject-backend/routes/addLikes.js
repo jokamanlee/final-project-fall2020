@@ -1,3 +1,4 @@
+const { request } = require("express");
 const express = require("express");
 
 const router = express.Router();
@@ -6,24 +7,22 @@ const firebase = require("firebase");
 
 const db = firebase.firestore();
 
-const posts = db.collection("posts");
+const posts = db.collection("allPosts");
 
-router.get("/", (req, res) => res.send("No ID Provided"));
-
-router.get("/:name", (req, res) => {
-  const queryParams = queryParams;
-  const queryId = req.params.name;
+router.get("/", (req, res) => {
+  const queryParams = req.query;
+  const increment = firebase.firestore.FieldValue.increment(queryParams.likes);
+  console.log(queryParams);
   posts
-    .doc(queryId)
-    .set({})
-    .then(function (doc) {
-      if (doc.exists) {
-        const data = doc.data();
-        return res.send(doc.data());
-      } else {
-        return res.send("No document exists");
-      }
-    })
+    .doc(queryParams.name)
+    .update(
+      {
+        likes: increment,
+      },
+
+      { merge: true }
+    )
+    .then()
     .catch(function (error) {
       return res.send(error);
     });

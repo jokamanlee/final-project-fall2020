@@ -2,24 +2,26 @@ const express = require("express");
 const router = express.Router();
 const firebase = require("firebase");
 const db = firebase.firestore();
-// const posts = db.collection("allPosts").doc("hello");
 
-router.get("/submit", (req, res) => {
+router.get("/", (req, res) => {
   const queryParams = req.query;
-  // const idOfPost = queryParams.id;
   const nameOfPost = queryParams.name;
-  const arrayToSet = [];
-  console.log(queryParams);
-  arrayToSet.push(queryParams.value);
+  const comments = [];
+
+  const likes = 0;
 
   db.collection("allPosts")
     .doc(nameOfPost)
-    .set(
-      queryParams
-      // arrayToSet
-      // comments: firebase.firestore.FieldValue.arrayUnion(),
-    )
-    // .add(arrayToSet)
+    .set({
+      name: queryParams.name,
+      id: queryParams.id,
+      photo: queryParams.photo,
+      text: queryParams.text,
+      cat: queryParams.cat,
+      comments: comments,
+      likes: likes,
+    })
+
     .then()
     .catch(function (error) {
       console.log("error", error);

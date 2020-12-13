@@ -1,15 +1,29 @@
+import axios from "axios";
 import React from "react";
 
 function Create({ userAuthInfo }) {
+  function submitPost(e) {
+    e.preventDefault();
+    const name = e.currentTarget.name.value;
+    const text = e.currentTarget.text.value;
+    const photo = e.currentTarget.photo.value;
+    const cat = e.currentTarget.cat.value;
+    const userId = userAuthInfo.uid;
+
+    axios
+      .get(
+        `https://stormy-temple-10357.herokuapp.com/create?name=${name}&text=${text}&photo=${photo}&cat=${cat}&id=${userId}`
+      )
+      .then(function (response) {
+        console.log({ SUCCESS: response });
+      })
+      .catch(function (error) {
+        console.log("ERROR_CREATING_POST", error);
+      });
+  }
   return (
     <div>
-      <iframe name="hiddenFrame"></iframe>
-      <form
-        // action="https://stormy-temple-10357.herokuapp.com/create/submit"
-        action="http://localhost:4000/create/submit"
-        method="get"
-        target="hiddenFrame"
-      >
+      <form onSubmit={(e) => submitPost(e)}>
         <label for="name">Name:</label>
         <input type="text" name="name" placeholder="Name" />
         <label for="text">Text:</label>

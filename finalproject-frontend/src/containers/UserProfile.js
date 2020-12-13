@@ -1,20 +1,12 @@
 import React from "react";
 
 import UserProfileComponenet from "../components/UserProfileComponent";
+import CreateUsername from "./CreateUsername";
 
-function UserProfile({ userAuthInfo, justCreated }) {
-  console.log(justCreated);
+function UserProfile({ userAuthInfo }) {
   return (
     <div>
-      <nav>
-        {justCreated ? (
-          <>
-            <a href="/create-username">Create Name</a>
-          </>
-        ) : (
-          <></>
-        )}
-      </nav>
+      <CreateUsername userAuthInfo={userAuthInfo} />
       <h1>User Profile</h1>
       <UserProfileComponenet userAuthInfo={userAuthInfo} />
     </div>

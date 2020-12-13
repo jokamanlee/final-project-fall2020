@@ -6,15 +6,14 @@ const db = firebase.firestore();
 router.get("/", (req, res) => {
   const queryParams = req.query;
   console.log(queryParams);
+  const commentAndtime = `${queryParams.comment} ${queryParams.time}`;
+
   db.collection("allPosts")
     .doc(queryParams.name)
 
     .update(
       {
-        comments: firebase.firestore.FieldValue.arrayUnion(
-          queryParams.comment,
-          queryParams.time
-        ),
+        comments: firebase.firestore.FieldValue.arrayUnion(commentAndtime),
       },
       { merge: true }
     )

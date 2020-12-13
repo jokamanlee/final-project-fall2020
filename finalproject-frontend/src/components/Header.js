@@ -10,7 +10,9 @@ function Header({ loggedIn, LogoutFunction }) {
             <a href="/user-profile">User Profile</a>
             <a href="/create">Create</a>
 
-            <a onClick={() => LogoutFunction()}>Logout</a>
+            <a href="/login" onClick={() => LogoutFunction()}>
+              Logout
+            </a>
           </>
         ) : (
           <>
