@@ -7,9 +7,7 @@ function UserProfileComponent({ userAuthInfo }) {
     const name = e.currentTarget.name.value;
     axios
       .get(`https://stormy-temple-10357.herokuapp.com/delete?name=${name}`)
-      .then(function (response) {
-        console.log({ SUCCESS: response });
-      })
+      .then()
       .catch(function (error) {
         console.log("ERROR_CREATING_POST", error);
       });
@@ -52,9 +50,7 @@ function UserProfileComponent({ userAuthInfo }) {
     const id = e.currentTarget.id.value;
     axios
       .get(`http://localhost:4000/deleteName?name=${id}`)
-      .then(function (response) {
-        console.log({ SUCCESS: response });
-      })
+      .then()
       .catch(function (error) {
         console.log("ERROR_CREATING_POST", error);
       });
@@ -63,39 +59,57 @@ function UserProfileComponent({ userAuthInfo }) {
   function refreshPage() {
     window.location.reload(false);
   }
-
   return (
     <div>
-      <div>
+      <div className="username">
         {userData.map((item, i) => (
           <div key={i}>
-            <p>Hello {item.username}</p>
-            <form onSubmit={(e) => deleteName(e)}>
+            <p className="nameTag">Hello {item.username}</p>
+            <form className="deleteName" onSubmit={(e) => deleteName(e)}>
               <input type="hidden" name="id" value={userAuthInfo.uid} />
-              <button type="submit" onClick={refreshPage}>
+              <button
+                className="deleteButton"
+                type="submit"
+                onClick={refreshPage}
+              >
                 Delete
               </button>
             </form>
           </div>
         ))}
       </div>
-
-      <div className="postWrap">
-        {POSTData.map((item, i) => (
-          <div className="Item" key={i}>
-            <p className="Name">{item.name}</p>
-            <div className="photoContainer">
-              <img className="Photo" src={item.photo} />
+      <div className="eachUserItem">
+        <div className="postWrap">
+          {POSTData.map((item, i) => (
+            <div className="item" key={i}>
+              <p className="Name">{item.name}</p>
+              <div className="photoContainer">
+                <img className="Photo" src={item.photo} />
+              </div>
+              <p className="Text">{item.text}</p>
+              <div className="comments">
+                {item.comments.map((comment, c) => (
+                  <div key={c}>
+                    <p className="comment">
+                      {comment}
+                      <br></br>
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <form onSubmit={(e) => deletePost(e)}>
+                <input type="hidden" name="name" value={item.name}></input>
+                <button
+                  className="deleteButtonPost"
+                  type="submit"
+                  onClick={refreshPage}
+                >
+                  Delete
+                </button>
+              </form>
             </div>
-            <p className="Text">{item.text}</p>
-            <form onSubmit={(e) => deletePost(e)}>
-              <input type="hidden" name="name" value={item.name}></input>
-              <button type="submit" onClick={refreshPage}>
-                Delete
-              </button>
-            </form>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

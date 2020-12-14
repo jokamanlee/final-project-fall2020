@@ -3,8 +3,8 @@ import BraceletComponent from "../components/BraceletComponent";
 
 function Bracelet() {
   return (
-    <div>
-      <h1>Bracelet</h1>
+    <div className="catPage">
+      <h1>Bracelets</h1>
       <BraceletComponent />
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import EachPost from "./EachPost";
 
 function NecklaceComponent() {
   const [POSTData, setPOSTData] = useState([]);
@@ -9,8 +10,6 @@ function NecklaceComponent() {
       .then(function (response) {
         if (response.data) {
           setPOSTData(response.data);
-
-          console.log(response.data);
         }
       })
       .catch(function (error) {
@@ -22,12 +21,8 @@ function NecklaceComponent() {
     <div>
       <div className="postWrap">
         {POSTData.map((item, i) => (
-          <div className="Item" key={i}>
-            <p className="Name">{item.name}</p>
-            <div className="photoContainer">
-              <img className="Photo" src={item.photo} />
-            </div>
-            <p className="Text">{item.text}</p>
+          <div className="eachItem">
+            <EachPost PostInfo={item} key={i} />
           </div>
         ))}
       </div>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-// import CreateComment from "./CreateComment";
 
 function EachPost({ PostInfo }) {
   const date = new Date();
@@ -20,7 +19,7 @@ function EachPost({ PostInfo }) {
       .get(
         `https://stormy-temple-10357.herokuapp.com/addLikes?name=${PostInfo.name}&likes=${num}`
       )
-
+      .then()
       .catch(function (error) {
         console.log("Error getting like", error);
       });
@@ -40,9 +39,7 @@ function EachPost({ PostInfo }) {
       .get(
         `https://stormy-temple-10357.herokuapp.com/addComment?name=${name}&comment=${comment}&time=${time}`
       )
-      .then(function (response) {
-        console.log({ SUCCESS: response });
-      })
+      .then()
       .catch(function (error) {
         console.log("ERROR_CREATING_POST", error);
       });
@@ -52,7 +49,7 @@ function EachPost({ PostInfo }) {
     window.location.reload(false);
   }
   return (
-    <div className="eachItem">
+    <div className="posts">
       <p className="Name">{PostInfo.name}</p>
       <div className="photoContainer">
         <img className="Photo" src={PostInfo.photo} onClick={likePost} />
@@ -61,7 +58,7 @@ function EachPost({ PostInfo }) {
       <p className="Text">{PostInfo.text}</p>
       <div className="comments">
         {PostInfo.comments.map((comment, i) => (
-          <div className="Item" key={i}>
+          <div key={i}>
             <p className="comment">
               {comment}
               <br></br>
@@ -69,9 +66,10 @@ function EachPost({ PostInfo }) {
           </div>
         ))}
       </div>
-      <div>
+      <div className="commentForm">
         <form onSubmit={(e) => submitComment(e)}>
           <input
+            className="commentInput"
             type="text"
             name="comment"
             placeholder="Wanna say something...?"
@@ -80,7 +78,7 @@ function EachPost({ PostInfo }) {
           <input type="hidden" name="time" value={time}></input>
 
           <button type="submit" onClick={refreshPage}>
-            Submit Post
+            Submit Comment
           </button>
         </form>
       </div>

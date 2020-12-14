@@ -20,7 +20,6 @@ function Home({ userAuthInfo }) {
 
   return (
     <div className="Home">
-      <iframe name="hiddenFrame"></iframe>
       <h1>Home Page</h1>
       <nav className="catergories">
         <h2 className="braceletLink">
@@ -35,7 +34,7 @@ function Home({ userAuthInfo }) {
       </nav>
       <div className="postWrap">
         {POSTSData.map((item, i) => (
-          <div>
+          <div className="eachItem">
             <EachPost userAuthInfo={userAuthInfo} PostInfo={item} key={i} />
           </div>
         ))}

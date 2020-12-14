@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import axios from "axios";
 
@@ -11,9 +11,7 @@ function CreateUsername({ userAuthInfo }) {
       .get(
         `https://stormy-temple-10357.herokuapp.com/createName/submit?username=${username}&id=${id}`
       )
-      .then(function (response) {
-        console.log({ SUCCESS: response });
-      })
+      .then()
       .catch(function (error) {
         console.log("ERROR_CREATING_POST", error);
       });
@@ -24,9 +22,14 @@ function CreateUsername({ userAuthInfo }) {
   }
 
   return (
-    <div class="createName">
+    <div>
       <form onSubmit={(e) => createName(e)}>
-        <input type="text" name="username"></input>
+        <input
+          class="createName"
+          type="text"
+          name="username"
+          placeholder="Type your name..."
+        ></input>
         <input type="hidden" name="id" value={userAuthInfo.uid} />
         <button type="submit" onClick={refreshPage}>
           Submit Name

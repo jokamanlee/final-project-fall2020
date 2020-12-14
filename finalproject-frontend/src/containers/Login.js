@@ -3,8 +3,11 @@ import LoginForm from "../components/LoginForm";
 
 function Login({ LoginFunction }) {
   return (
-    <div>
-      <LoginForm LoginFunction={LoginFunction} />
+    <div className="account">
+      <p className="titlePage">Login</p>
+      <div className="accountForm">
+        <LoginForm LoginFunction={LoginFunction} />
+      </div>
     </div>
   );
 }

@@ -1,8 +1,18 @@
-.App {
-  max-width: 1040px;
-  margin: 0 auto;
+@import url(https://weloveiconfonts.com/api/?family=fontawesome);
+[class*="fontawesome-"]:before {
+  font-family: "FontAwesome", sans-serif;
 }
+.App {
+  font-family: "JetBrains Mono", monospace;
+  margin: 0 auto;
+  max-width: 1040px;
+}
+
 /***** NAVBAR*****/
+Header {
+  margin: 20px;
+  text-align: center;
+}
 
 .Header nav {
   display: flex;
@@ -12,16 +22,19 @@
 .Header nav a {
   color: black;
   cursor: pointer;
-  font-size: 20px;
   display: block;
+  font-size: 40px;
   margin: 10px;
   text-decoration: none;
+}
+.pageName {
+  font-size: 40px;
 }
 
 /***** HOME PAGE*****/
 .Home {
-  width: 1040px;
   text-align: center;
+  width: 1040px;
 }
 
 .Home nav {
@@ -34,29 +47,36 @@
   cursor: pointer;
   text-decoration: none;
 }
+/*****POST****/
 .Photo {
-  max-width: 100%;
-  max-height: 100%;
-  display: block;
   border: 2px solid black;
+  display: block;
+  max-height: 100%;
+  max-width: 100%;
 }
 .photoContainer {
   height: 200px;
-  text-align: center;
-  width: 200px;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
+  width: 200px;
 }
 
 .postWrap {
   text-align: center;
 }
 
+.item {
+  border: 2px solid black;
+  margin: 10px;
+}
+
 .eachItem {
   border: 2px solid black;
-  height: 500px;
-  width: 400px;
-  margin: 20px auto;
+  height: auto;
+  margin: 70px auto;
+  padding: 20px;
+  width: auto;
 }
 
 .Name {
@@ -70,24 +90,131 @@
   margin: 10px;
 }
 .comments {
-  /* border: 2px solid black; */
+  border: 1px solid black;
   display: flex;
-  height: 70px;
   flex-direction: column;
-
+  height: 70px;
+  margin: 10px;
   overflow-y: auto;
 }
 .comment {
+  border-bottom: 1px solid black;
   display: flex;
   justify-content: flex-start;
-  /* border-bottom: 1px solid black; */
   margin: 0;
 }
 
-iframe {
-  position: bottom;
-  width: 0;
-  height: 0;
+.commentInput {
+  float: left;
+  margin: 10px;
+  width: 85%;
+}
+/****USER PROFILE***/
+.username {
+  display: flex;
+  justify-content: flex-start;
+}
+.nameTag {
+  float: left;
+}
+.deleteName {
+  float: right;
+  margin: 15px;
+}
+.postWrap {
+  height: auto;
+  margin: 20px auto;
+  width: 400px;
+}
+.createName {
+  height: 20px;
+}
+
+.deleteButton {
+  background-color: rgb(241, 137, 137);
+  height: 20px;
+}
+.deleteButtonPost {
+  background-color: rgb(241, 137, 137);
+  height: 20px;
+  margin: 10px;
+}
+
+/****Create post*****/
+
+.createPost {
+  display: flex;
+  flex-direction: column;
+  padding: 200px;
+  padding-top: 50px;
+}
+.createForm {
+  display: flex;
+  justify-content: flex-start;
+}
+.extraColumn {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  margin: 20px;
+  width: 100%;
+}
+.extraColumnSmaller {
+  display: flex;
+  flex-direction: column;
+  float: bottom;
+  height: 100px;
+  margin: 20px;
+  width: 100px;
+}
+
+input {
   border: 0;
-  display: none;
+  border-radius: 10px;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  height: 30px;
+  margin: 10px;
+}
+input[type="text"] {
+  padding: 15px;
+}
+
+select {
+  border-radius: 10px;
+  padding: 10px;
+  width: 100px;
+}
+.submitPostButton {
+  margin-top: 40px;
+}
+
+button {
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 5px;
+  font-weight: bold;
+  height: 35px;
+  margin: top;
+}
+
+label {
+  font-weight: bold;
+}
+
+/*****SIGNIN/CREATE ACCOUNT PAGE****/
+.account {
+  padding: 15px;
+  text-align: center;
+}
+.titlePage {
+  font-size: 30px;
+  font-weight: bold;
+}
+.accountForm {
+  padding: 60px;
+  text-align: center;
+}
+
+.catPage {
+  text-align: center;
 }

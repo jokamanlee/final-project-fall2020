@@ -3,8 +3,8 @@ import NecklaceComponent from "../components/NecklaceComponent";
 
 function Necklace() {
   return (
-    <div>
-      <h1>Necklace</h1>
+    <div className="catPage">
+      <h1>Necklaces</h1>
       <NecklaceComponent />
     </div>
   );
