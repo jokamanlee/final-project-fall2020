@@ -32,7 +32,9 @@ function Header({ loggedIn, LogoutFunction }) {
           </>
         )}
       </nav>
-      <a className="pageName">Share Your Jewelry</a>
+      <a className="pageName" href="/">
+        Share Your Jewelry
+      </a>
     </header>
   );
 }
