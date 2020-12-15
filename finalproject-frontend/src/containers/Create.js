@@ -52,7 +52,7 @@ function Create({ userAuthInfo }) {
             type="text"
             id="photo"
             name="photo"
-            placeholder="Copy location path of photo)"
+            placeholder="Copy location path of photo"
           />
         </div>
         <div className="extraColumnSmaller">
