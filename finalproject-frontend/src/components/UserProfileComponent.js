@@ -49,7 +49,7 @@ function UserProfileComponent({ userAuthInfo }) {
     e.preventDefault();
     const id = e.currentTarget.id.value;
     axios
-      .get(`http://localhost:4000/deleteName?name=${id}`)
+      .get(`https://stormy-temple-10357.herokuapp.com/deleteName?id=${id}`)
       .then()
       .catch(function (error) {
         console.log("ERROR_CREATING_POST", error);

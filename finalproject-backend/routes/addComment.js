@@ -5,7 +5,6 @@ const db = firebase.firestore();
 
 router.get("/", (req, res) => {
   const queryParams = req.query;
-  console.log(queryParams);
   const commentAndtime = `${queryParams.comment} ${queryParams.time}`;
 
   db.collection("allPosts")
@@ -19,7 +18,6 @@ router.get("/", (req, res) => {
     )
     .then()
     .catch(function (error) {
-      console.log("error", error);
       res.send("Failed Comment");
     });
 });

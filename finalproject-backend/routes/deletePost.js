@@ -10,7 +10,6 @@ const posts = db.collection("allPosts");
 
 router.get("/", (req, res) => {
   const queryParams = req.query;
-  console.log(queryParams);
   posts
     .doc(queryParams.name)
     .delete()

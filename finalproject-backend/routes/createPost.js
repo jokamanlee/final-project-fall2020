@@ -24,7 +24,6 @@ router.get("/", (req, res) => {
 
     .then()
     .catch(function (error) {
-      console.log("error", error);
       res.send("Failed Submission");
     });
 });

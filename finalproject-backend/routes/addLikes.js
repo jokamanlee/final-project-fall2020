@@ -12,7 +12,6 @@ const posts = db.collection("allPosts");
 router.get("/", (req, res) => {
   const queryParams = req.query;
   const increment = firebase.firestore.FieldValue.increment(queryParams.likes);
-  console.log(queryParams);
   posts
     .doc(queryParams.name)
     .update(

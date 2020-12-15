@@ -10,13 +10,12 @@ const users = db.collection("allUsers");
 
 router.get("/", (req, res) => {
   const queryParams = req.query;
-  console.log(queryParams.name);
   users
-    .doc(queryParams.name)
+    .doc(queryParams.id)
     .delete()
     .then()
     .catch(function (error) {
-      console.log("error removing doc: ", error);
+      res.send("error removing doc: ", error);
     });
 });
 
